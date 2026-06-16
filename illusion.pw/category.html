@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分类 · 白纸黑字</title>
+<meta name="description" content="白纸黑字 —— 文章分类索引，按主题浏览随笔。">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23b5251f'/><circle cx='50' cy='50' r='34' fill='none' stroke='white' stroke-width='3'/></svg>">
+<style>
+  :root{
+    --ink:#121212;
+    --ink-soft:#5a5a58;
+    --ink-faint:#8a8782;
+    --paper:#fcfcfa;
+    --paper-shade:#eeece6;
+    --rule:#1f1f1f;
+    --rule-soft:#d8d5cc;
+    --seal:#b5251f;
+    --serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+    --sans:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    --nav-h:60px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:var(--nav-h);}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ::selection{background:var(--seal); color:var(--paper);}
+
+  .wrap{max-width:1140px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- 顶部导航 ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    height:var(--nav-h);
+    display:flex; align-items:center; justify-content:space-between;
+    background:rgba(252,252,250,0.96);
+    border-bottom:1px solid var(--ink);
+    backdrop-filter:saturate(120%);
+  }
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between; width:100%;}
+  .brand-mark{
+    font-weight:900; font-size:1.05rem; letter-spacing:.08em;
+    white-space:nowrap;
+  }
+  .brand-mark a{color:inherit; text-decoration:none;}
+  .nav-links{
+    display:flex; gap:4px; overflow-x:auto; scrollbar-width:none;
+    font-family:var(--sans);
+  }
+  .nav-links::-webkit-scrollbar{display:none;}
+  .nav-links a{
+    flex:0 0 auto;
+    font-size:.82rem; letter-spacing:.12em; text-transform:uppercase;
+    padding:8px 14px; border-bottom:2px solid transparent;
+    transition:color .15s, border-color .15s;
+  }
+  .nav-links a:hover, .nav-links a.active{
+    color:var(--seal); border-bottom-color:var(--seal);
+  }
+  .nav-issue{
+    font-family:var(--sans); font-size:.74rem; color:var(--ink-soft);
+    letter-spacing:.06em; white-space:nowrap; display:none;
+  }
+  @media(min-width:760px){ .nav-issue{display:block;} }
+
+  a:focus-visible, .nav-links a:focus-visible{
+    outline:2px dashed var(--seal); outline-offset:3px;
+  }
+
+  /* ---------- 通用版面元素 ---------- */
+  .section{padding:84px 0;}
+  .label-row{
+    display:flex; align-items:baseline; gap:14px; margin-bottom:42px;
+  }
+  .label-row .label{
+    font-family:var(--sans); font-size:.78rem; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--ink); white-space:nowrap;
+  }
+  .label-row .rule{flex:1; height:1px; background:var(--ink);}
+
+  /* ---------- 分类列表 ---------- */
+  .category-list{list-style:none; padding:0; margin:0;}
+  .category-item{
+    padding:28px 0;
+    border-bottom:1px solid var(--rule-soft);
+    display:flex; justify-content:space-between; align-items:flex-start;
+    gap:20px;
+  }
+  .category-item:first-child{border-top:1px solid var(--rule-soft);}
+  .category-link{
+    font-size:1.18rem; font-weight:700;
+    transition:color .15s;
+  }
+  .category-link:hover{color:var(--seal);}
+  .category-description{
+    font-size:.92rem; color:var(--ink-soft); margin-top:6px;
+  }
+  .category-count{
+    font-family:var(--sans); font-size:.74rem; letter-spacing:.08em;
+    color:var(--ink-soft); white-space:nowrap;
+    border:1px solid var(--rule-soft); padding:4px 12px;
+  }
+
+  /* ---------- 页脚 ---------- */
+  footer{
+    border-top:1px solid var(--ink);
+    padding:30px 0 40px;
+    font-family:var(--sans);
+  }
+  .foot-row{
+    display:flex; flex-wrap:wrap; gap:10px 24px; justify-content:space-between;
+    font-size:.78rem; color:var(--ink-soft); align-items:center;
+  }
+  .foot-row .icp a{color:var(--ink-soft); border-bottom:1px solid var(--rule-soft);}
+  .foot-row .icp a:hover{color:var(--seal); border-bottom-color:var(--seal);}
+  .foot-note{
+    margin-top:14px; font-size:.72rem; color:var(--ink-faint); line-height:1.6;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <span class="brand-mark"><a href="index.html">白纸黑字</a></span>
+    <nav class="nav-links">
+      <a href="index.html" target="_blank">首页</a>
+      <a href="essays.html" target="_blank">随笔</a>
+      <a href="category.html" class="active">分类</a>
+      <a href="about.html" target="_blank">关于</a>
+      <a href="contact.html" target="_blank">联系</a>
+    </nav>
+    <span class="nav-issue">今日刊 · NO. 014</span>
+  </div>
+</header>
+
+<main>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="label-row"><span class="label">分类 · Sections</span><span class="rule"></span></div>
+
+      <ul class="category-list">
+        <li class="category-item">
+          <div>
+            <a href="#" class="category-link">日常</a>
+            <div class="category-description">记录日常生活中的点滴感悟与思考</div>
+          </div>
+          <span class="category-count">12 篇</span>
+        </li>
+
+        <li class="category-item">
+          <div>
+            <a href="#" class="category-link">夜思</a>
+            <div class="category-description">夜深人静时的思绪与独白</div>
+          </div>
+          <span class="category-count">8 篇</span>
+        </li>
+
+        <li class="category-item">
+          <div>
+            <a href="#" class="category-link">节气</a>
+            <div class="category-description">跟随二十四节气记录季节变迁</div>
+          </div>
+          <span class="category-count">9 篇</span>
+        </li>
+
+        <li class="category-item">
+          <div>
+            <a href="#" class="category-link">旧物</a>
+            <div class="category-description">那些承载记忆的老物件与故事</div>
+          </div>
+          <span class="category-count">5 篇</span>
+        </li>
+
+        <li class="category-item">
+          <div>
+            <a href="#" class="category-link">厨房</a>
+            <div class="category-description">食物、味道与家的温暖</div>
+          </div>
+          <span class="category-count">7 篇</span>
+        </li>
+
+        <li class="category-item">
+          <div>
+            <a href="#" class="category-link">旅途</a>
+            <div class="category-description">旅途中的风景、人文与故事</div>
+          </div>
+          <span class="category-count">6 篇</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <span>© 2026 白纸黑字 · 保留所有权利</span>
+      <span class="icp"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">豫ICP备2026025242号</a></span>
+    </div>
+    <div class="foot-note">本网站为个人非经营性网站，仅用于记录与分享个人生活随笔，不涉及经营性活动。</div>
+  </div>
+</footer>
+
+</body>
+</html>
